@@ -14,9 +14,9 @@ changelog:
       labels:
         - bug
 
-    - title: UI Fixes
+    - title: Refactorings
       labels:
-        - ui
+        - refactoring
 
     - title: Documentation
       labels:
