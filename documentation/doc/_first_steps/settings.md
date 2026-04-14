@@ -57,6 +57,8 @@ To access these settings, simply press the 'tools' button located in the GdUnit 
       1. *AUTO_DETECT* - generates the file name by source file naming convention.
       2. *SNAKE_CASE*  - generates the file name in snake case convention.
       3. *PASCAL_CASE* - generates the file name in pascal case convention.
+      4. *KEBAB_CASE* - generates the file name in
+      kebab case convention.
 
   * **Test Timeout Seconds**<br>
       This setting configures the default timeout for a test case in seconds. If a test case runs longer than the specified timeout, the test will be

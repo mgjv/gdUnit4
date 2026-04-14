@@ -585,6 +585,13 @@ func test_get_class_name_snake_case() -> void:
 		.is_equal("SnakeCaseWithoutClassName")
 
 
+func test_get_class_name_kebab_case() -> void:
+	assert_str(_parser.get_class_name(load("res://addons/gdUnit4/test/core/resources/naming_conventions/kebab-case-with-class-name.gd") as GDScript))\
+		.is_equal("KebabCaseWithClassName")
+	assert_str(_parser.get_class_name(load("res://addons/gdUnit4/test/core/resources/naming_conventions/kebab-case-without-class-name.gd") as GDScript))\
+		.is_equal("KebabCaseWithoutClassName")
+
+
 func test_get_class_with_extends_in_same_line() -> void:
 	assert_str(_parser.get_class_name(load("res://addons/gdUnit4/test/core/resources/naming_conventions/extends_on_same_line.gd") as GDScript))\
 		.is_equal("ClassNameExtendsInSameLine")

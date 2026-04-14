@@ -269,6 +269,14 @@ func test_get_class_name_from_snake_case_class_path() -> void:
 		.is_success().is_value("SnakeCaseWithoutClassName")
 
 
+func test_get_class_name_from_kebab_case_class_path() -> void:
+	assert_result(extract_class_name("res://addons/gdUnit4/test/core/resources/naming_conventions/kebab-case-with-class-name.gd"))\
+		.is_success().is_value("KebabCaseWithClassName")
+	# without class_name
+	assert_result(extract_class_name("res://addons/gdUnit4/test/core/resources/naming_conventions/kebab-case-without-class-name.gd"))\
+		.is_success().is_value("KebabCaseWithoutClassName")
+
+
 func test_get_class_name_from_pascal_case_class_path() -> void:
 	assert_result(extract_class_name("res://addons/gdUnit4/test/core/resources/naming_conventions/PascalCaseWithClassName.gd"))\
 		.is_success().is_value("PascalCaseWithClassName")

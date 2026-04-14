@@ -267,6 +267,8 @@ static func _to_naming_convention(file_name: String) -> String:
 		GdUnitSettings.NAMING_CONVENTIONS.AUTO_DETECT:
 			if GdObjects.is_snake_case(file_name):
 				return GdObjects.to_snake_case(file_name + "Test")
+			elif GdObjects.is_kebab_case(file_name):
+				return GdObjects.to_kebab_case(file_name + "Test")
 			return GdObjects.to_pascal_case(file_name + "Test")
 		GdUnitSettings.NAMING_CONVENTIONS.SNAKE_CASE:
 			return GdObjects.to_snake_case(file_name + "Test")

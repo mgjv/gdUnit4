@@ -180,6 +180,48 @@ func test_create_test_suite_snake_case_path() -> void:
 			""])
 
 
+func test_create_test_suite_kebab_case_path() -> void:
+	var temp_dir := create_temp_dir("TestSuiteScannerTest")
+	# checked source with class_name is set
+	var source_path :="res://addons/gdUnit4/test/core/resources/naming_conventions/kebab-case-with-class-name.gd"
+	var suite_path := temp_dir + "/test/my-class-test1.gd"
+	var result := GdUnitTestSuiteScanner.create_test_suite(suite_path, source_path)
+	assert_bool(result.is_success()).is_true()
+	assert_str(result.value()).is_equal(suite_path)
+	assert_file(result.value()).exists()\
+		.is_file()\
+		.is_script()\
+		.contains_exactly([
+			"# GdUnit generated TestSuite",
+			"class_name KebabCaseWithClassNameTest",
+			"extends GdUnitTestSuite",
+			"@warning_ignore('unused_parameter')",
+			"@warning_ignore('return_value_discarded')",
+			"",
+			"# TestSuite generated from",
+			"const __source: String = '%s'" % source_path,
+			""])
+	# checked source with class_name is NOT set
+	source_path ="res://addons/gdUnit4/test/core/resources/naming_conventions/kebab-case-without-class-name.gd"
+	suite_path = temp_dir + "/test/my-class-test2.gd"
+	result = GdUnitTestSuiteScanner.create_test_suite(suite_path, source_path)
+	assert_bool(result.is_success()).is_true()
+	assert_str(result.value()).is_equal(suite_path)
+	assert_file(result.value()).exists()\
+		.is_file()\
+		.is_script()\
+		.contains_exactly([
+			"# GdUnit generated TestSuite",
+			"class_name KebabCaseWithoutClassNameTest",
+			"extends GdUnitTestSuite",
+			"@warning_ignore('unused_parameter')",
+			"@warning_ignore('return_value_discarded')",
+			"",
+			"# TestSuite generated from",
+			"const __source: String = '%s'" % source_path,
+			""])
+
+
 func test_create_test_case() -> void:
 	# store test class checked temp dir
 	var tmp_path := create_temp_dir("TestSuiteScannerTest")
@@ -253,7 +295,7 @@ func test_scan_by_inheritance_class_name() -> void:
 
 
 func test_get_test_case_line_number() -> void:
-	assert_int(GdUnitTestSuiteScanner.get_test_case_line_number("res://addons/gdUnit4/test/core/GdUnitTestSuiteScannerTest.gd", "get_test_case_line_number")).is_equal(255)
+	assert_int(GdUnitTestSuiteScanner.get_test_case_line_number("res://addons/gdUnit4/test/core/GdUnitTestSuiteScannerTest.gd", "get_test_case_line_number")).is_equal(297)
 	assert_int(GdUnitTestSuiteScanner.get_test_case_line_number("res://addons/gdUnit4/test/core/GdUnitTestSuiteScannerTest.gd", "unknown")).is_equal(-1)
 
 

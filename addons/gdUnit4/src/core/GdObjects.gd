@@ -336,6 +336,23 @@ static func is_snake_case(value :String) -> bool:
 	for ch in value:
 		if ch == '_':
 			continue
+		if ch == '-':
+			return false
+		if ch == ch.to_upper():
+			return false
+	return true
+
+
+static func to_kebab_case(value: String) -> String:
+	return value.to_kebab_case()
+
+
+static func is_kebab_case(value :String) -> bool:
+	for ch in value:
+		if ch == '-':
+			continue
+		if ch == '_':
+			return false
 		if ch == ch.to_upper():
 			return false
 	return true
