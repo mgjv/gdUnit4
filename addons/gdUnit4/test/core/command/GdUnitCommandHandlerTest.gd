@@ -15,19 +15,30 @@ func after() -> void:
 
 
 func test_command_shortcut() -> void:
-	assert_str(_handler.command_shortcut(GdUnitCommandInspectorRunTests.ID).get_as_text()).is_equal("Alt+F5")
-	assert_str(_handler.command_shortcut(GdUnitCommandInspectorDebugTests.ID).get_as_text()).is_equal("Alt+F6")
-	assert_str(_handler.command_shortcut(GdUnitCommandRunTestsOverall.ID).get_as_text()).is_equal("Alt+F7")
-	assert_str(_handler.command_shortcut(GdUnitCommandStopTestSession.ID).get_as_text()).is_equal("Alt+F8")
-	assert_str(_handler.command_shortcut(GdUnitCommandScriptEditorRunTests.ID).get_as_text()).is_equal("Ctrl+Alt+F5")
-	assert_str(_handler.command_shortcut(GdUnitCommandScriptEditorDebugTests.ID).get_as_text()).is_equal("Ctrl+Alt+F6")
-	assert_str(_handler.command_shortcut(GdUnitCommandScriptEditorCreateTest.ID).get_as_text()).is_equal("Ctrl+Alt+F10")
-	if Engine.get_version_info().hex >= 0x40600:
-		assert_str(_handler.command_shortcut(GdUnitCommandFileSystemRunTests.ID).get_as_text()).is_equal("Alt+Shift+F5")
-		assert_str(_handler.command_shortcut(GdUnitCommandFileSystemDebugTests.ID).get_as_text()).is_equal("Alt+Shift+F6")
+	if OS.get_name() != "macOS":
+		assert_str(_handler.command_shortcut(GdUnitCommandInspectorRunTests.ID).get_as_text()).is_equal("Alt+F5")
+		assert_str(_handler.command_shortcut(GdUnitCommandInspectorDebugTests.ID).get_as_text()).is_equal("Alt+F6")
+		assert_str(_handler.command_shortcut(GdUnitCommandRunTestsOverall.ID).get_as_text()).is_equal("Alt+F7")
+		assert_str(_handler.command_shortcut(GdUnitCommandStopTestSession.ID).get_as_text()).is_equal("Alt+F8")
+		assert_str(_handler.command_shortcut(GdUnitCommandScriptEditorRunTests.ID).get_as_text()).is_equal("Ctrl+Alt+F5")
+		assert_str(_handler.command_shortcut(GdUnitCommandScriptEditorDebugTests.ID).get_as_text()).is_equal("Ctrl+Alt+F6")
+		assert_str(_handler.command_shortcut(GdUnitCommandScriptEditorCreateTest.ID).get_as_text()).is_equal("Ctrl+Alt+F10")
+		if Engine.get_version_info().hex >= 0x40600:
+			assert_str(_handler.command_shortcut(GdUnitCommandFileSystemRunTests.ID).get_as_text()).is_equal("Alt+Shift+F5")
+			assert_str(_handler.command_shortcut(GdUnitCommandFileSystemDebugTests.ID).get_as_text()).is_equal("Alt+Shift+F6")
+		else:
+			assert_str(_handler.command_shortcut(GdUnitCommandFileSystemRunTests.ID).get_as_text()).is_equal("Shift+Alt+F5")
+			assert_str(_handler.command_shortcut(GdUnitCommandFileSystemDebugTests.ID).get_as_text()).is_equal("Shift+Alt+F6")
 	else:
-		assert_str(_handler.command_shortcut(GdUnitCommandFileSystemRunTests.ID).get_as_text()).is_equal("Shift+Alt+F5")
-		assert_str(_handler.command_shortcut(GdUnitCommandFileSystemDebugTests.ID).get_as_text()).is_equal("Shift+Alt+F6")
+		assert_str(_handler.command_shortcut(GdUnitCommandInspectorRunTests.ID).get_as_text()).is_equal("Option+F5")
+		assert_str(_handler.command_shortcut(GdUnitCommandInspectorDebugTests.ID).get_as_text()).is_equal("Option+F6")
+		assert_str(_handler.command_shortcut(GdUnitCommandRunTestsOverall.ID).get_as_text()).is_equal("Option+F7")
+		assert_str(_handler.command_shortcut(GdUnitCommandStopTestSession.ID).get_as_text()).is_equal("Option+F8")
+		assert_str(_handler.command_shortcut(GdUnitCommandScriptEditorRunTests.ID).get_as_text()).is_equal("Option+F5")
+		assert_str(_handler.command_shortcut(GdUnitCommandScriptEditorDebugTests.ID).get_as_text()).is_equal("Option+F6")
+		assert_str(_handler.command_shortcut(GdUnitCommandScriptEditorCreateTest.ID).get_as_text()).is_equal("Option+F10")
+		assert_str(_handler.command_shortcut(GdUnitCommandFileSystemRunTests.ID).get_as_text()).is_equal("Option+F5")
+		assert_str(_handler.command_shortcut(GdUnitCommandFileSystemDebugTests.ID).get_as_text()).is_equal("Option+F6")
 
 
 ## actually needs to comment out, it produces a lot of leaked instances
